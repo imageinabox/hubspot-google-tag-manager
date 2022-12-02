@@ -1,0 +1,17 @@
+<script>
+    window.addEventListener('message', function(event) {
+        //Form Submission #1
+        if(event.data.type === 'hsFormCallback' && event.data.eventName === 'onFormSubmit') {
+            dataLayer.push({'event':'hubspot-form-submission','hubspot-form-id':event.data.id});
+        }
+        //Form Submission #2
+        if(event.data.accepted && event.data.formGuid) {
+            dataLayer.push({'event':'hubspot-form-submission','hubspot-form-id':event.data.formGuid});
+        }
+        //Booked Meetings
+        if ( event.data.meetingBookSucceeded ) {
+            // Fire your misc tracking code here...
+            dataLayer.push({'event':'scheduled-meeting','hubspot-form-id':event.data.id});
+        }
+    });
+</script>
